@@ -1,6 +1,6 @@
-package com.example.weather_kotlin_app.api
-
+package com.example.weather_kotlin_app.data.api
 import android.adservices.adselection.ReportImpressionRequest
+import com.example.weather_kotlin_app.data.model.WeatherModel
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

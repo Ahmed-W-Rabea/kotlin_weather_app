@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,16 +67,27 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Retrofit
     val retrofitVersion = "2.11.0"
-    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
-    implementation ("androidx.compose.runtime:runtime-livedata:1.6.8")
+    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
+    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+
+    // Coil for image loading
     implementation("io.coil-kt:coil-compose:2.7.0")
-    implementation ("com.google.android.gms:play-services-location:21.0.1")
 
-    implementation ("androidx.room:room-runtime:2.5.1")
+    // Google Play Services Location
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 
+    // Room
+    val roomVersion = "2.5.2"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+
+    // LiveData for Compose
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
 }
+
 
 kapt {
     correctErrorTypes = true

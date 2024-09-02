@@ -1,7 +1,5 @@
-package com.example.weather_kotlin_app
-
-import WeatherRepository
-import WeatherViewModel
+package com.example.weather_kotlin_app.ui.pages
+import com.example.weather_kotlin_app.data.repository.WeatherRepository
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 

@@ -1,6 +1,4 @@
-package com.example.weather_kotlin_app
-
-import WeatherViewModel
+package com.example.weather_kotlin_app.ui.pages
 import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
@@ -43,10 +41,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.weather_kotlin_app.api.NetworkResponse
-import com.example.weather_kotlin_app.api.WeatherModel
 import com.google.android.gms.location.LocationServices
 import android.Manifest
 import androidx.compose.ui.platform.LocalContext
+import com.example.weather_kotlin_app.data.model.WeatherModel
 
 
 @Composable
@@ -163,21 +161,21 @@ Column (modifier = Modifier
     }
     Spacer(modifier = Modifier.height(16.dp))
     Text(text = "${data.current.temp_c} °c" , fontSize = 56.sp , fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
-    AsyncImage( modifier = Modifier.size(160.dp),model = "https:${data.current.condition.icon}".replace("64*64" , "128*128"), contentDescription = "Condition ivon" )
+    AsyncImage( modifier = Modifier.size(160.dp),model = "https:${data.current.condition.icon}".replace("64*64" , "128*128"), contentDescription = "com.example.weather_kotlin_app.data.model.Condition ivon" )
     Text(text = data.current.condition.text, fontSize = 24.sp ,  textAlign = TextAlign.Center  , fontWeight = FontWeight.Bold)
     Spacer(modifier = Modifier.height(16.dp))
     Card {
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround) {
-                WeatherKeyValue("Humidity" , data.current.humidity.toString())
-                WeatherKeyValue("Wind Speed" , data.current.wind_kph.toString()+ " km/h")
+                WeatherKeyValue("Humidity" , data.current.humidity)
+                WeatherKeyValue("Wind Speed" , data.current.wind_kph+ " km/h")
 
 
             }
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround) {
-                WeatherKeyValue("UV" , data.current.uv.toString())
+                WeatherKeyValue("UV" , data.current.uv)
                 WeatherKeyValue("Wind Direction" , data.current.wind_dir)
 
 

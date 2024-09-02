@@ -10,7 +10,7 @@
 //import com.google.android.gms.location.LocationServices
 //
 //@Composable
-//fun RequestLocationPermission(onPermissionGranted: () -> Unit) {
+//fun com.example.weather_kotlin_app.ui.pages.RequestLocationPermission(onPermissionGranted: () -> Unit) {
 //    val permissionLauncher = rememberLauncherForActivityResult(
 //        contract = ActivityResultContracts.RequestPermission(),
 //        onResult = { isGranted ->
@@ -25,7 +25,7 @@
 //}
 //
 //@SuppressLint("MissingPermission")
-//fun getCurrentLocation(context: Context, onLocationReceived: (Location) -> Unit) {
+//fun com.example.weather_kotlin_app.ui.pages.getCurrentLocation(context: Context, onLocationReceived: (Location) -> Unit) {
 //    val fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
 //    fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
 //        location?.let {
@@ -39,8 +39,8 @@
 //    val context = LocalContext.current
 //    var location by remember { mutableStateOf<Location?>(null) }
 //
-//    RequestLocationPermission {
-//        getCurrentLocation(context) {
+//    com.example.weather_kotlin_app.ui.pages.RequestLocationPermission {
+//        com.example.weather_kotlin_app.ui.pages.getCurrentLocation(context) {
 //            location = it
 //        }
 //    }
