@@ -1,27 +1,28 @@
 package com.example.weather_kotlin_app.data.api
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
+import androidx.room.RewriteQueriesToDropUnusedColumns
 
-import androidx.room.*
 import com.example.weather_kotlin_app.data.model.LocationEntity
 import com.example.weather_kotlin_app.data.model.WeatherEntity
-
 
 @Dao
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWeather(weatherEntity: WeatherEntity)
+     fun insertWeather(weatherEntity: WeatherEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertLocation(locationEntity: LocationEntity)
+     fun insertLocation(locationEntity: LocationEntity)
 
     @Query("SELECT * FROM weather WHERE city = :city")
-    suspend fun getWeather(city: String): WeatherEntity?
+    fun getWeather(city: String): LiveData<WeatherEntity?>
 
     @Query("SELECT * FROM location WHERE city = :city")
-    suspend fun getLocation(city: String): LocationEntity?
+    fun getLocation(city: String): LiveData<LocationEntity?>
+
 }

@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    kotlin("kapt")// Apply the Kotlin kapt plugin
+    kotlin("kapt") // Apply the Kotlin kapt plugin
 }
 
 android {
@@ -42,7 +42,7 @@ android {
         viewBinding = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.1" // Ensure this matches the Compose version
     }
     packaging {
         resources {
@@ -87,7 +87,6 @@ dependencies {
     // LiveData for Compose
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
 }
-
 
 kapt {
     correctErrorTypes = true

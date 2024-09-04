@@ -10,16 +10,17 @@ import com.example.weather_kotlin_app.data.repository.WeatherRepository
 import kotlinx.coroutines.launch
 
 
-class WeatherViewModel(private val weatherRepository: WeatherRepository) : ViewModel() {
+class WeatherViewModel(private val repository: WeatherRepository) : ViewModel() {
     private val _weatherResult = MutableLiveData<NetworkResponse<WeatherModel>>()
-    val weatherResult: LiveData<NetworkResponse<WeatherModel>> = _weatherResult
+    val weatherResult: LiveData<NetworkResponse<WeatherModel>> get() = _weatherResult
 
     fun getData(city: String) {
-        _weatherResult.value = NetworkResponse.Loading
         viewModelScope.launch {
-            val response = weatherRepository.getWeatherData(city)
+            _weatherResult.value = NetworkResponse.Loading
+            val response = repository.getWeatherData(city)
             _weatherResult.value = response
         }
     }
 }
+
 

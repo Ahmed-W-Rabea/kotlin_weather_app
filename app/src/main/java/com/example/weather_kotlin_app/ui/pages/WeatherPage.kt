@@ -73,13 +73,10 @@ fun getCurrentLocation(context: Context, onLocationReceived: (Location) -> Unit)
 }
 
 @Composable
-fun WeatherPage(viewModel: WeatherViewModel){
-
-    var city by remember {
-        mutableStateOf("")
-    }
+fun WeatherPage(viewModel: WeatherViewModel) {
+    var city by remember { mutableStateOf("") }
     val weatherResult = viewModel.weatherResult.observeAsState()
-    val keyboardController= LocalSoftwareKeyboardController.current
+    val keyboardController = LocalSoftwareKeyboardController.current
     val context = LocalContext.current
     var location by remember { mutableStateOf<Location?>(null) }
 
@@ -96,50 +93,51 @@ fun WeatherPage(viewModel: WeatherViewModel){
         Text(text = "Latitude: ${it.latitude}, Longitude: ${it.longitude}")
     } ?: Text(text = "Fetching location...", textAlign = TextAlign.Center)
 
-    Column (modifier = Modifier
+    Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(16.dp)){
-        Row (modifier = Modifier
+        .padding(16.dp)) {
+        Row(modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.SpaceBetween){
+            horizontalArrangement = Arrangement.SpaceBetween) {
             OutlinedTextField(
                 modifier = Modifier.weight(1f),
-                value =  city, onValueChange ={city = it},
-            label = {
-                Text(text = "search for any location")            })
+                value = city,
+                onValueChange = { city = it },
+                label = { Text(text = "search for any location") }
+            )
 
-            IconButton(onClick = { viewModel.getData(city)
-            keyboardController?.hide()}) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = "Search for any location" )
-
-
-                }
+            IconButton(onClick = {
+                viewModel.getData(city)
+                keyboardController?.hide()
+            }) {
+                Icon(imageVector = Icons.Default.Search, contentDescription = "Search for any location")
+            }
         }
 
-        when(val result = weatherResult.value){
+        when (val result = weatherResult.value) {
             is NetworkResponse.Error -> {
                 Text(text = result.message)
             }
             NetworkResponse.Loading -> {
-
                 Box(
-                    modifier = Modifier
-                        .fillMaxSize(),
+                    modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
                     CircularProgressIndicator()
-                }            }
+                }
+            }
             is NetworkResponse.Success -> {
                 WeatherDetails(data = result.data)
             }
             null -> {
-
+                // Handle empty state if needed
             }
         }
     }
 }
+
 @Composable
 fun WeatherDetails(data: WeatherModel){
 Column (modifier = Modifier
@@ -168,14 +166,14 @@ Column (modifier = Modifier
         Column(modifier = Modifier.fillMaxWidth()) {
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround) {
-                WeatherKeyValue("Humidity" , data.current.humidity)
-                WeatherKeyValue("Wind Speed" , data.current.wind_kph+ " km/h")
+                WeatherKeyValue("Humidity" , data.current.humidity.toString())
+                WeatherKeyValue("Wind Speed" , data.current.wind_kph.toString()+ " km/h")
 
 
             }
             Row(modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceAround) {
-                WeatherKeyValue("UV" , data.current.uv)
+                WeatherKeyValue("UV" , data.current.uv.toString())
                 WeatherKeyValue("Wind Direction" , data.current.wind_dir)
 
 
